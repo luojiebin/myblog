@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% load markdown_deux_tags %}
+
+{% block title %}About me &raquo; keep simple{% endblock title %}
+
+{% block header %}
+<h1>About me</h1>
+
+<div class="tagline">
+  Who's behind this blog?
+</div>
+
+{% endblock header %}
+
+{% block article %}
+
+{{ about|markdown }}
+
+{% endblock article %}

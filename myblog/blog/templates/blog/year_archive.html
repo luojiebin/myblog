@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Archive &raquo; keep simple{% endblock title %}
+
+{% block header %}
+<h1>Archive</h1>
+<div class="tagline">
+  All thoughts and writings.
+</div>
+{% endblock header %}
+
+{% block article %}
+{% for year, posts in year_posts %}
+<h1 class="year">{{ year }}</h1>
+<div>
+  {% for post in posts %}
+  <div class="post-entry">
+    <div class="post-detail">
+      <h2>
+        <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+        <span class="post-date">{{ post.created|date:"M d, Y" }}</span>
+      </h2>
+    </div>
+  </div>
+  {% endfor %}
+  {% endfor %}
+{% endblock article %}

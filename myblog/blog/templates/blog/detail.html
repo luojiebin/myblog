@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% load markdown_deux_tags %}
+
+{% block title %}{{ post.title }} &raquo; keep simple{% endblock title %}
+
+{% block header %}
+<h1>{{ post.title }}</h1><br>
+
+  <div class="meta">
+    <small>
+    By <a href="{% url "blog:about" %}">Luo Jiebin</a><br>
+    on {{ post.created|date:"l, M d, Y"}}
+    </small>
+  </div>
+
+{% endblock header %}
+
+{% block article %}
+
+  <div class="post">{{ post.content|markdown }}</div>
+
+{% endblock article %}
+
+
+</article>

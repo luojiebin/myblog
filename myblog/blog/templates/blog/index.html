@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block header %}
+<h1>keep simple</h1>
+
+<div class="tagline">
+  Thoughts and writtings by Luo Jiebin.
+</div>
+{% endblock header%}
+
+{% block article %}
+{% for post in posts %}
+<div class="post-entry">
+  <div class="post-detail">
+    <h2>
+      <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+      <span class="post-date">{{ post.created|date:"M d, Y" }}</span>
+    </h2>
+  </div>
+</div>
+{% endfor %}
+
+
+<h2 class="readmore">
+  <a href="{% url "blog:archive" %}">Read more posts &raquo;</a>
+</h2>
+
+{% endblock article %}
+
+{% block footer %}
+{% endblock footer %}

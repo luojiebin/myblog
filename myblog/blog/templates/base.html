@@ -1,0 +1,56 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1"/>
+    <meta name="generator" content="iron"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=RobotoDraft:300,400|Inconsolata:400,700"/>
+    <link rel="stylesheet" type="text/css" href="{% static "main.css" %}"/>
+    <link rel="shortcut icon" type="image/x-icon" href="{% static "img/favicon.ico" %}" />
+
+    <title>
+      {% block title %} keep simple {% endblock title %}
+    </title>
+
+  </head>
+
+  <body class="home">
+    <div class="site-container">
+      <div class="site-header">
+        <nav>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/posts/">Posts</a></li>
+            <li><a href="/about/">About</a></li>
+          </ul>
+        </nav>
+
+        <header>
+          {% block header %}
+          {% endblock header %}
+        </header>
+      </div>
+
+      <article>
+        {% block article %}
+        {% endblock article%}
+      </article>
+
+    </div>
+
+    <footer>
+      <div id="footer">
+        {% block footer %}
+        <p>
+          Luo Jiebin is a Python software engineer from China.
+        </p>
+        {% endblock footer %}
+
+      </div>
+    </footer>
+
+  </body>
+</html>
