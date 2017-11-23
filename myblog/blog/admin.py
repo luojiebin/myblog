@@ -3,7 +3,7 @@ from django.db import models
 
 from pagedown.widgets import AdminPagedownWidget
 
-from .models import Post, About
+from .models import Post, About, Tag
 
 
 admin.site.site_header = 'Blog Administration'
@@ -11,11 +11,15 @@ admin.site.site_header = 'Blog Administration'
 
 def publish_post(modeladmin, request, queryset):
     queryset.update(publish=True)
+
+
 publish_post.short_description = 'Publish Post'
 
 
 def draft_post(modeladmin, request, queryset):
     queryset.update(publish=False)
+
+
 draft_post.short_description = 'Draft Post'
 
 
@@ -39,3 +43,9 @@ class AboutAdmin(admin.ModelAdmin):
         if not About.objects.count():
             return True
         return False
+
+
+@admin.register(Tag)
+class TagAdmin(admin.ModelAdmin):
+    list_display = ('name', 'capacity', 'created', 'modified')
+    prepopulated_fields = {'slug': ('name',)}

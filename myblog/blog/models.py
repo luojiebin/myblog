@@ -1,4 +1,5 @@
 import collections
+from operator import attrgetter
 
 from django.db import models
 from django.urls import reverse
@@ -19,11 +20,38 @@ class PublishedPostManager(models.Manager):
         return [(year, dd[year]) for year in sorted(dd)]
 
 
+class TagManager(models.Manager):
+    def ordered_by_capacity(self):
+        tags = self.get_queryset()
+        return sorted(list(tags), key=attrgetter('capacity'), reverse=True)
+
+
+class Tag(TimeStampedModel):
+    name = models.CharField(max_length=16, unique=True)
+    slug = models.SlugField()
+
+    objects = TagManager()
+
+    @property
+    def capacity(self):
+        return self.post_set.count()
+
+    class Meta:
+        ordering = ('-created',)
+
+    def get_absolute_url(self):
+        return reverse('blog:tag', args=[self.slug])
+
+    def __str__(self):
+        return self.name
+
+
 class Post(TimeStampedModel):
     title = models.CharField(max_length=200, unique=True)
     slug = models.SlugField()
     content = models.TextField()
     publish = models.BooleanField(default=True)
+    tags = models.ManyToManyField(Tag, blank=True)
 
     objects = models.Manager()
     published = PublishedPostManager()
@@ -33,6 +61,9 @@ class Post(TimeStampedModel):
 
     def get_absolute_url(self):
         return reverse('blog:detail', args=[self.slug])
+
+    def __str__(self):
+        return 'Post<{}>'.format(self.title)
 
 
 class About(models.Model):
