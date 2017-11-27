@@ -40,7 +40,7 @@ class Tag(TimeStampedModel):
         ordering = ('-created',)
 
     def get_absolute_url(self):
-        return reverse('blog:tag', args=[self.slug])
+        return reverse('blog:tag_detail', args=[self.slug])
 
     def __str__(self):
         return self.name

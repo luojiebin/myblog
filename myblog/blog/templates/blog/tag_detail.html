@@ -1,15 +1,16 @@
 {% extends "base.html" %}
 
 {% block header %}
-<h1>keep simple</h1>
+<h1>{{ tag.name }}</h1>
 
 <div class="tagline">
-  Thoughts and writtings by Luo Jiebin.
+  Thoughts and writtings by Tag: {{ tag.name }}.
 </div>
 {% endblock header%}
 
 {% block article %}
 {% for post in posts %}
+
 <div class="post-entry">
   <div class="post-detail">
     <h2>
@@ -19,10 +20,5 @@
   </div>
 </div>
 {% endfor %}
-
-
-<h2 class="readmore">
-  <a href="{% url "blog:archive" %}">Read more posts &raquo;</a>
-</h2>
 
 {% endblock article %}

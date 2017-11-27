@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Tags &raquo; keep simple{% endblock title %}
+
+{% block header %}
+<h1>Tags</h1>
+<div class="tagline">
+  All tags to group thoughts and writtings.
+</div>
+{% endblock header %}
+
+{% block article %}
+<div>
+  {% for tag in tags %}
+  <div class="tag-entry">
+    <div class="tag-detail">
+      <h2>
+        <a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>
+      </h2>
+    </div>
+  </div>
+  {% endfor %}
+{% endblock article %}

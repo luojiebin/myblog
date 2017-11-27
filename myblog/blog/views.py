@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from .models import Post, About
+from .models import Post, About, Tag
 
 
 def index(request):
@@ -19,6 +19,20 @@ def detail(request, slug):
 def year_archive(request):
     return render(request, 'blog/year_archive.html', {
         'year_posts': Post.published.year_carchive(),
+    })
+
+
+def tags(request):
+    return render(request, 'blog/tags.html', {
+        'tags': Tag.objects.ordered_by_capacity(),
+    })
+
+
+def tag_detail(request, slug):
+    tag = Tag.objects.get(slug=slug)
+    return render(request, 'blog/tag_detail.html', {
+        'tag': tag,
+        'posts': tag.post_set.all(),
     })
 
 
